@@ -13,3 +13,5 @@ faiss-cpu
 wikipedia
 arxiv
 langchainhub
+langchain-groq
+groq
