@@ -23,7 +23,8 @@ if "vector" not in st.session_state:
     st.session_state.final_documents = st.session_state.text_splitter.split_documents(st.session_state.docs[:50])
     st.session_state.vectors = FAISS.from_documents(st.session_state.final_documents, st.session_state.embeddings)
 
-st.title("groq demo")
+st.title("Learn Ottoman Empire History")
+st.subheader("groq demo")
 llm = ChatGroq(groq_api_key = groq_api_key, model_name = "Gemma-7b-It")
 
 prompt = ChatPromptTemplate.from_template("Answer the questions only based on the provided context.\
@@ -35,7 +36,7 @@ document_chain = create_stuff_documents_chain(llm, prompt)
 ret = st.session_state.vectors.as_retriever()
 ret_chan = create_retrieval_chain(ret, document_chain)
 
-prompt = st.text_input("Write here")
+prompt = st.text_input("Ask me about Ottoman Empire!")
 
 if prompt:
     result = ret_chan.invoke({"input": prompt})
